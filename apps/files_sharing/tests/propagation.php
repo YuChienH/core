@@ -313,8 +313,7 @@ class Propagation extends TestCase {
 	public function testOwnerWritesToShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER1);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER1 . '/files');
-		$view->file_put_contents('/sub1/sub2/folder/asd.txt', 'bar');
+		Filesystem::file_put_contents('/sub1/sub2/folder/asd.txt', 'bar');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3]);
 	}
@@ -322,8 +321,7 @@ class Propagation extends TestCase {
 	public function testOwnerWritesToShareWithReshare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER1);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER1 . '/files');
-		$view->file_put_contents('/sub1/sub2/folder/inside/bar.txt', 'bar');
+		Filesystem::file_put_contents('/sub1/sub2/folder/inside/bar.txt', 'bar');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
@@ -331,8 +329,7 @@ class Propagation extends TestCase {
 	public function testOwnerRenameInShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER1);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER1 . '/files');
-		$view->rename('/sub1/sub2/folder/file.txt', '/sub1/sub2/folder/renamed.txt');
+		Filesystem::rename('/sub1/sub2/folder/file.txt', '/sub1/sub2/folder/renamed.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3]);
 	}
@@ -340,8 +337,7 @@ class Propagation extends TestCase {
 	public function testOwnerRenameInReShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER1);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER1 . '/files');
-		$view->rename('/sub1/sub2/folder/inside/file.txt', '/sub1/sub2/folder/inside/renamed.txt');
+		Filesystem::rename('/sub1/sub2/folder/inside/file.txt', '/sub1/sub2/folder/inside/renamed.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
@@ -349,8 +345,7 @@ class Propagation extends TestCase {
 	public function testOwnerRenameIntoReShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER1);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER1 . '/files');
-		$view->rename('/sub1/sub2/folder/file.txt', '/sub1/sub2/folder/inside/renamed.txt');
+		Filesystem::rename('/sub1/sub2/folder/file.txt', '/sub1/sub2/folder/inside/renamed.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
@@ -358,8 +353,7 @@ class Propagation extends TestCase {
 	public function testOwnerRenameOutOfReShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER1);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER1 . '/files');
-		$view->rename('/sub1/sub2/folder/inside/file.txt', '/sub1/sub2/folder/renamed.txt');
+		Filesystem::rename('/sub1/sub2/folder/inside/file.txt', '/sub1/sub2/folder/renamed.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
@@ -367,8 +361,7 @@ class Propagation extends TestCase {
 	public function testOwnerDeleteInShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER1);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER1 . '/files');
-		$view->unlink('/sub1/sub2/folder/file.txt');
+		Filesystem::unlink('/sub1/sub2/folder/file.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3]);
 	}
@@ -376,8 +369,7 @@ class Propagation extends TestCase {
 	public function testOwnerDeleteInReShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER1);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER1 . '/files');
-		$view->unlink('/sub1/sub2/folder/inside/file.txt');
+		Filesystem::unlink('/sub1/sub2/folder/inside/file.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
@@ -385,8 +377,7 @@ class Propagation extends TestCase {
 	public function testRecipientWritesToShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER2);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER2 . '/files');
-		$view->file_put_contents('/sub1/sub2/folder/asd.txt', 'bar');
+		Filesystem::file_put_contents('/sub1/sub2/folder/asd.txt', 'bar');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3]);
 	}
@@ -394,8 +385,7 @@ class Propagation extends TestCase {
 	public function testRecipientWritesToReshare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER2);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER2 . '/files');
-		$view->file_put_contents('/sub1/sub2/folder/inside/asd.txt', 'bar');
+		Filesystem::file_put_contents('/sub1/sub2/folder/inside/asd.txt', 'bar');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
@@ -403,8 +393,7 @@ class Propagation extends TestCase {
 	public function testRecipientWritesToOtherRecipientsReshare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER3);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER3 . '/files');
-		$view->file_put_contents('/sub1/sub2/folder/inside/asd.txt', 'bar');
+		Filesystem::file_put_contents('/sub1/sub2/folder/inside/asd.txt', 'bar');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
@@ -412,8 +401,7 @@ class Propagation extends TestCase {
 	public function testRecipientRenameInShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER2);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER2 . '/files');
-		$view->rename('/sub1/sub2/folder/file.txt', '/sub1/sub2/folder/renamed.txt');
+		Filesystem::rename('/sub1/sub2/folder/file.txt', '/sub1/sub2/folder/renamed.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3]);
 	}
@@ -421,8 +409,7 @@ class Propagation extends TestCase {
 	public function testRecipientRenameInReShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER2);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER2 . '/files');
-		$view->rename('/sub1/sub2/folder/inside/file.txt', '/sub1/sub2/folder/inside/renamed.txt');
+		Filesystem::rename('/sub1/sub2/folder/inside/file.txt', '/sub1/sub2/folder/inside/renamed.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
@@ -430,8 +417,7 @@ class Propagation extends TestCase {
 	public function testRecipientDeleteInShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER2);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER2 . '/files');
-		$view->unlink('/sub1/sub2/folder/file.txt');
+		Filesystem::unlink('/sub1/sub2/folder/file.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3]);
 	}
@@ -439,8 +425,7 @@ class Propagation extends TestCase {
 	public function testRecipientDeleteInReShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER2);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER2 . '/files');
-		$view->unlink('/sub1/sub2/folder/inside/file.txt');
+		Filesystem::unlink('/sub1/sub2/folder/inside/file.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
@@ -448,8 +433,7 @@ class Propagation extends TestCase {
 	public function testReshareRecipientWritesToReshare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER4);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER4 . '/files');
-		$view->file_put_contents('/sub1/sub2/inside/asd.txt', 'bar');
+		Filesystem::file_put_contents('/sub1/sub2/inside/asd.txt', 'bar');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
@@ -457,8 +441,7 @@ class Propagation extends TestCase {
 	public function testReshareRecipientRenameInReShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER4);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER4 . '/files');
-		$view->rename('/sub1/sub2/inside/file.txt', '/sub1/sub2/folder/inside/renamed.txt');
+		Filesystem::rename('/sub1/sub2/inside/file.txt', '/sub1/sub2/folder/inside/renamed.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
@@ -466,8 +449,7 @@ class Propagation extends TestCase {
 	public function testReshareRecipientDeleteInReShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER4);
-		$view = new View('/' . self::TEST_FILES_SHARING_API_USER4 . '/files');
-		$view->unlink('/sub1/sub2/inside/file.txt');
+		Filesystem::unlink('/sub1/sub2/inside/file.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
