@@ -441,7 +441,7 @@ class Propagation extends TestCase {
 	public function testReshareRecipientRenameInReShare() {
 		$this->setUpShares();
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER4);
-		Filesystem::rename('/sub1/sub2/inside/file.txt', '/sub1/sub2/folder/inside/renamed.txt');
+		Filesystem::rename('/sub1/sub2/inside/file.txt', '/sub1/sub2/inside/renamed.txt');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3, self::TEST_FILES_SHARING_API_USER4]);
 	}
