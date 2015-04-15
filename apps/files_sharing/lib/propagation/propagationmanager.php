@@ -108,5 +108,6 @@ class PropagationManager {
 		// for marking shares owned by the active user as dirty when a file inside them changes
 		$this->listenToOwnerChanges($user->getUID(), $user->getUID());
 		\OC_Hook::connect('OC_Filesystem', 'write', $watcher, 'writeHook');
+		\OC_Hook::connect('OC_Filesystem', 'delete', $watcher, 'writeHook');
 	}
 }
