@@ -23,6 +23,9 @@ class ChangeWatcher {
 	 */
 	private $baseView;
 
+	/**
+	 * @param \OC\Files\View $baseView the view for the logged in user
+	 */
 	public function __construct(View $baseView) {
 		$this->baseView = $baseView;
 	}

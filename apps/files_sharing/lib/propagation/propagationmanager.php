@@ -80,7 +80,7 @@ class PropagationManager {
 	}
 
 	/**
-	 * Attach the propagator to the change propagator of a user to listen to changes made to files shared by the user
+	 * Attach the recipient propagator for $user to the change propagator of a share owner to mark shares as dirty when the owner makes a change to a share
 	 *
 	 * @param string $shareOwner
 	 * @param string $user

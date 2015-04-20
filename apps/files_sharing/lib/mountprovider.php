@@ -37,7 +37,7 @@ class MountProvider implements IMountProvider {
 
 
 	/**
-	 * Get all mountpoints applicable for the user
+	 * Get all mountpoints applicable for the user and check for shares where we need to update the etags
 	 *
 	 * @param \OCP\IUser $user
 	 * @param \OCP\Files\Storage\IStorageFactory $storageFactory
