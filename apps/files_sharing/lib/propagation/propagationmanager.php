@@ -42,9 +42,7 @@ class PropagationManager {
 	 */
 	private $sharePropagators = [];
 
-	private $globalSetupDone = false;
-
-	function __construct(IUserSession $userSession, IConfig $config) {
+	public function __construct(IUserSession $userSession, IConfig $config) {
 		$this->userSession = $userSession;
 		$this->config = $config;
 	}

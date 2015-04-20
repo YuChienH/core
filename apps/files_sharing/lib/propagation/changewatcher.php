@@ -23,7 +23,7 @@ class ChangeWatcher {
 	 */
 	private $baseView;
 
-	function __construct(View $baseView) {
+	public function __construct(View $baseView) {
 		$this->baseView = $baseView;
 	}
 
@@ -62,7 +62,7 @@ class ChangeWatcher {
 		$view = new View('/' . $share['uid_owner'] . '/files');
 
 		$shareRootPath = $view->getPath($share['item_source']);
-		if ($shareRootPath) {
+		if (!is_null($shareRootPath)) {
 			$path = $shareRootPath . '/' . $internalPath;
 			$propagator->addChange($path);
 			$propagator->propagateChanges();

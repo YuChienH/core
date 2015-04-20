@@ -30,7 +30,7 @@ class MountProvider implements IMountProvider {
 	 * @param \OCP\IConfig $config
 	 * @param \OCA\Files_Sharing\Propagation\PropagationManager $propagationManager
 	 */
-	function __construct(IConfig $config, PropagationManager $propagationManager) {
+	public function __construct(IConfig $config, PropagationManager $propagationManager) {
 		$this->config = $config;
 		$this->propagationManager = $propagationManager;
 	}
