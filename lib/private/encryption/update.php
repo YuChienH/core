@@ -109,7 +109,7 @@ class Update {
 			$allFiles = array($absPath);
 		}
 
-		$encryptionModule = $this->encryptionManager->getDefaultEncryptionModule();
+		$encryptionModule = $this->encryptionManager->getEncryptionModule();
 
 		foreach ($allFiles as $path) {
 			$usersSharing = $this->file->getAccessList($path);
