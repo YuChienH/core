@@ -198,8 +198,7 @@ class EtagPropagation extends TestCase {
 	public function testRecipientRenameResharedFolder() {
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER2);
 		Filesystem::rename('/directReshare', '/sub1/directReshare');
-		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
-			self::TEST_FILES_SHARING_API_USER3]);
+		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER2]);
 	}
 
 	public function testRecipientDeleteInShare() {
