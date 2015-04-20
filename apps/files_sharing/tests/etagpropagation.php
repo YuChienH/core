@@ -49,11 +49,16 @@ class EtagPropagation extends TestCase {
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER1);
 		$view1 = new View('/' . self::TEST_FILES_SHARING_API_USER1 . '/files');
 		$view1->mkdir('/sub1/sub2/folder/inside');
+		$view1->mkdir('/directReshare');
+		$view1->mkdir('/sub1/sub2/folder/other');
+		$view1->mkdir('/sub1/sub2/folder/other');
 		$view1->file_put_contents('/sub1/sub2/folder/file.txt', 'foobar');
 		$view1->file_put_contents('/sub1/sub2/folder/inside/file.txt', 'foobar');
 		$folderInfo = $view1->getFileInfo('/sub1/sub2/folder');
 		\OCP\Share::shareItem('folder', $folderInfo->getId(), \OCP\Share::SHARE_TYPE_USER, self::TEST_FILES_SHARING_API_USER2, 31);
 		\OCP\Share::shareItem('folder', $folderInfo->getId(), \OCP\Share::SHARE_TYPE_USER, self::TEST_FILES_SHARING_API_USER3, 31);
+		$folderInfo = $view1->getFileInfo('/directReshare');
+		\OCP\Share::shareItem('folder', $folderInfo->getId(), \OCP\Share::SHARE_TYPE_USER, self::TEST_FILES_SHARING_API_USER2, 31);
 		$this->rootIds[self::TEST_FILES_SHARING_API_USER1] = $view1->getFileInfo('')->getId();
 
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER2);
@@ -62,6 +67,8 @@ class EtagPropagation extends TestCase {
 		$view2->rename('/folder', '/sub1/sub2/folder');
 		$insideInfo = $view2->getFileInfo('/sub1/sub2/folder/inside');
 		\OCP\Share::shareItem('folder', $insideInfo->getId(), \OCP\Share::SHARE_TYPE_USER, self::TEST_FILES_SHARING_API_USER4, 31);
+		$folderInfo = $view2->getFileInfo('/directReshare');
+		\OCP\Share::shareItem('folder', $folderInfo->getId(), \OCP\Share::SHARE_TYPE_USER, self::TEST_FILES_SHARING_API_USER4, 31);
 		$this->rootIds[self::TEST_FILES_SHARING_API_USER2] = $view2->getFileInfo('')->getId();
 
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER3);
@@ -190,7 +197,7 @@ class EtagPropagation extends TestCase {
 
 	public function testRecipientRenameResharedFolder() {
 		$this->loginAsUser(self::TEST_FILES_SHARING_API_USER2);
-		Filesystem::rename('/sub1/sub2/folder/inside', '/sub1/sub2/folder/renamed');
+		Filesystem::rename('/directReshare', '/sub1/directReshare');
 		$this->assertRootEtagsChanged([self::TEST_FILES_SHARING_API_USER1, self::TEST_FILES_SHARING_API_USER2,
 			self::TEST_FILES_SHARING_API_USER3]);
 	}
